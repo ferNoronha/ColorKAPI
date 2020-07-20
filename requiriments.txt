@@ -1,0 +1,5 @@
+numpy
+fastapi[all]
+opencv-python
+imageio
+python-multipart
