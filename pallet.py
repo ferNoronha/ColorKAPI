@@ -24,7 +24,7 @@ class Pallet:
 
 
     def Kmeans(self, img):
-        try:
+        
         image = cv2.resize(img, (200,200))
         np_image = image.reshape((-1,3))
         np_image = np.float32(np_image)
