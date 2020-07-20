@@ -1,5 +1,3 @@
-
-
 import cv2
 import numpy as np
 import base64
@@ -14,16 +12,19 @@ class Pallet:
     
     def process(self,encode):
         error = []
-        img = imread(io.BytesIO(base64.b64decode(encode)))
-        #img = cv2.imread(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg')
-        cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        #pltimg = cv2.resize(img,(416,416))
-        center = self.Kmeans(cv2_img)
+        try:
+            img = imread(io.BytesIO(base64.b64decode(encode)))
+            cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+            #pltimg = cv2.resize(img,(416,416))
+            center = self.Kmeans(cv2_img)
+        except ValueError:
+            error.append(ValueError)
         return center, error
     
 
 
     def Kmeans(self, img):
+        try:
         image = cv2.resize(img, (200,200))
         np_image = image.reshape((-1,3))
         np_image = np.float32(np_image)
