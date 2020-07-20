@@ -1,6 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, Body
 from pallet import Pallet
-import uvicorn
 import base64
 import cv2
 from pydantic import BaseModel
