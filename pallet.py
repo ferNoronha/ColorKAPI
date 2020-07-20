@@ -64,12 +64,12 @@ if __name__ == "__main__":
     #teste = 
     
     #print(type(teste))
-    b64_string = teste.decode()
-    img = imread(io.BytesIO(base64.b64decode(b64_string)))
-    cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    cv2.imshow('teste',cv2_img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # b64_string = teste.decode()
+    # img = imread(io.BytesIO(base64.b64decode(b64_string)))
+    # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    # cv2.imshow('teste',cv2_img)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     
     
     #jpg_as_text = base64.b64encode(buffer)
