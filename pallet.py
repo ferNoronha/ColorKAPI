@@ -6,9 +6,9 @@ from imageio import imread
 
 
 class Pallet:
-    def __init__(self):
+    def __init__(self,K:5):
         self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-        self.K = 5
+        self.K = K
     
     def process(self,encode):
         error = []
@@ -55,8 +55,8 @@ class Pallet:
 
 if __name__ == "__main__":
     colors = Pallet()
-    #img = cv2.imread(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg')
-    #with open(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg', "rb") as fid:
+    #img = cv2.imread(r'D:\github\imageteste\teste.jpeg')
+    #with open(r'D:\github\imageteste\teste.jpeg', "rb") as fid:
     #    data = fid.read()
     #b64_bytes = base64.b64encode(data)
     #print(b64_bytes)

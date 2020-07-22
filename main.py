@@ -8,16 +8,21 @@ app = FastAPI()
 
 class Item(BaseModel):
     data: str
+    k: int
 
 #data: str = Body(...)
 @app.post("/clustering/")
 async def process(item: Item):
     centers = []
     error = []
-    print(item.data)
+    #print(item.data)
     if item is not None and item.data is not None and item.data!="":
         try:
-            colors = Pallet()
+            if item.k == 0:
+                k = 5
+            else:
+                k = item.k
+            colors = Pallet(k)
             #file64 = item.data.split(',')
             #print(len(file64))
             #if len(file64)>1:
