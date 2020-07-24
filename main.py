@@ -10,27 +10,8 @@ class Item(BaseModel):
     data: str
     k: int
 
-
-@app.get("/clustering/")
-async def image(item: Item):
-    centers = []
-    error = []
-    
-    if item.k == 0:
-        k = 5
-    else:
-        k = item.k
-    colors = Pallet(k)
-    file64 =  item.data.encode()
-    b64_string = file64.decode()
-    centers,error = colors.process(b64_string)
-    
-    return {"data":centers, "errors":error}
-
-
-
 #data: str = Body(...)
-@app.post("/clustering_post")
+@app.post("/clustering")
 async def process(item: Item):
     centers = []
     error = []
@@ -60,10 +41,6 @@ async def process(item: Item):
 @app.get("/")
 async def root():
     return {"message": 200}
-
-@app.post("/hello")
-async def hello():
-    return {"hello"}
 
 
 # if __name__ == '__main__':
