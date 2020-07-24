@@ -16,10 +16,6 @@ async def image(item: Item):
     centers = []
     error = []
     
-    #print(item.k)
-    
-    #print(item.data)
-    
     if item.k == 0:
         k = 5
     else:
