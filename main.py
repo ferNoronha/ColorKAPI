@@ -11,7 +11,7 @@ class Item(BaseModel):
     k: int
 
 
-@app.get("/image/")
+@app.get("/clustering/")
 async def image(item: Item):
     centers = []
     error = []
@@ -34,7 +34,7 @@ async def image(item: Item):
 
 
 #data: str = Body(...)
-@app.post("/clustering/")
+@app.post("/clustering_post/")
 async def process(item: Item):
     centers = []
     error = []
