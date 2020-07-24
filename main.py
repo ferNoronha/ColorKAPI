@@ -61,6 +61,10 @@ async def process(item: Item):
 async def root():
     return {"message": 200}
 
+@app.post("/hello/")
+async def hello():
+    return {"hello"}
+
 
 # if __name__ == '__main__':
 #     uvicorn.run(app,host='127.0.0.1',port='8000')
