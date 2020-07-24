@@ -30,7 +30,7 @@ async def image(item: Item):
 
 
 #data: str = Body(...)
-@app.post("/clustering_post/")
+@app.post("/clustering_post")
 async def process(item: Item):
     centers = []
     error = []
@@ -61,7 +61,7 @@ async def process(item: Item):
 async def root():
     return {"message": 200}
 
-@app.post("/hello/")
+@app.post("/hello")
 async def hello():
     return {"hello"}
 
