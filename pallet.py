@@ -44,15 +44,14 @@ class Pallet:
             labels.append(label)
             centersList.append(center)
 
-        #kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
+        kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
         
         #print(sse)
         #print(kn.knee)
         
-        #newK = kn.knee - 1
-        #if self.K < kn.knee:
-        #    newK = self.K-1
-        newK = 0
+        newK = kn.knee - 1
+        if self.K < kn.knee:
+            newK = self.K-1
         
         colors, count = np.unique(labels[newK].flatten(),return_counts= True)
         
