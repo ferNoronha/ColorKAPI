@@ -17,8 +17,8 @@ class Pallet:
             img = imread(io.BytesIO(base64.b64decode(encode)))
             cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             #pltimg = cv2.resize(img,(416,416))
-            #center = self.Kmeans(cv2_img)
-            center = []
+            center = self.Kmeans(cv2_img)
+            #center = []
         except ValueError:
             error.append(ValueError)
         return center, error
@@ -44,13 +44,15 @@ class Pallet:
             labels.append(label)
             centersList.append(center)
 
-        kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
+        #kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
+        
         #print(sse)
         #print(kn.knee)
-        newK = kn.knee - 1
-        if self.K < kn.knee:
-            newK = self.K-1
         
+        #newK = kn.knee - 1
+        #if self.K < kn.knee:
+        #    newK = self.K-1
+        newK = 0
         
         colors, count = np.unique(labels[newK].flatten(),return_counts= True)
         
