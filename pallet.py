@@ -44,7 +44,7 @@ class Pallet:
             labels.append(label)
             centersList.append(center)
 
-        kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
+        kn = KneeLocator(range(1,30), sse , curve='convex', direction='decreasing')
         
         #print(sse)
         #print(kn.knee)
