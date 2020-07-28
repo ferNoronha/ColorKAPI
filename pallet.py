@@ -73,14 +73,14 @@ class Pallet:
 
 
 if __name__ == "__main__":
-    colors = Pallet(5)
-    img = cv2.imread(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg')
-    colors.process(img)
-    cv2.imshow('teste',img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    #colors = Pallet(5)
+    # img = cv2.imread(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg')
+    # colors.process(img)
+    # cv2.imshow('teste',img)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     
-    
+    print('teste')
 
     
     #with open(r'D:\github\imageteste\teste.jpeg', "rb") as fid:
