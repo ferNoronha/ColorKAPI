@@ -15,7 +15,7 @@ class Item(BaseModel):
 async def process(item: Item):
     centers = []
     error = []
-    #print(item.data)
+    
     if item is not None and item.data is not None and item.data!="":
         try:
             if item.k == 0:
@@ -23,14 +23,9 @@ async def process(item: Item):
             else:
                 k = item.k
             colors = Pallet(k)
-            #file64 = item.data.split(',')
-            #print(len(file64))
-            #if len(file64)>1:
             file64 =  item.data.encode()
             b64_string = file64.decode()
             centers,error = colors.process(b64_string)
-            #else:
-            #    error.append('split error')
         except ValueError:
             error.append(ValueError)
     else:

@@ -3,7 +3,8 @@ import numpy as np
 import base64
 import io
 from imageio import imread
-
+from kneed import KneeLocator
+import matplotlib.pyplot as plt
 
 class Pallet:
     def __init__(self,K:5):
@@ -20,26 +21,44 @@ class Pallet:
         except ValueError:
             error.append(ValueError)
         return center, error
+        #center = self.Kmeans(encode)
+        #print(center)
+
     
 
 
     def Kmeans(self, img):
         
         image = cv2.resize(img, (200,200))
+        #image = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
         np_image = image.reshape((-1,3))
         np_image = np.float32(np_image)
-        ret,label,center = cv2.kmeans(np_image, self.K,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+
+        sse = []
+        labels = []
+        centersList = []
+        for i in range(1,30):
+            ret,label,center = cv2.kmeans(np_image,i,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+            sse.append(ret)
+            labels.append(label)
+            centersList.append(center)
+
+        kn = KneeLocator(range(len(sse)), sse , curve='convex', direction='decreasing')
+        #print(sse)
+        #print(kn.knee)
+        newK = kn.knee - 1
+        if self.K < kn.knee:
+            newK = self.K-1
         
         
-        colors, count = np.unique(label.flatten(),return_counts= True)
+        colors, count = np.unique(labels[newK].flatten(),return_counts= True)
         
         union = dict(zip(colors,count))
         
-        center = np.uint8(center)
-        #print(center)
+        center = np.uint8(centersList[newK])
         centers = []
         for key,value in sorted(union.items(), key= lambda x : x[1]):
-            centers.append(center[key].tolist())
+            centers.append(centersList[newK][key].tolist())
         
         cent = []
         for i in centers:
@@ -54,8 +73,16 @@ class Pallet:
 
 
 if __name__ == "__main__":
-    colors = Pallet()
-    #img = cv2.imread(r'D:\github\imageteste\teste.jpeg')
+    colors = Pallet(5)
+    img = cv2.imread(r'D:\Documentos\DiscoC\brincadeira\ocean.jpg')
+    colors.process(img)
+    cv2.imshow('teste',img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
+    
+
+    
     #with open(r'D:\github\imageteste\teste.jpeg', "rb") as fid:
     #    data = fid.read()
     #b64_bytes = base64.b64encode(data)
@@ -68,9 +95,7 @@ if __name__ == "__main__":
     # b64_string = teste.decode()
     # img = imread(io.BytesIO(base64.b64decode(b64_string)))
     # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    # cv2.imshow('teste',cv2_img)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    
     
     
     #jpg_as_text = base64.b64encode(buffer)
