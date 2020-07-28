@@ -17,7 +17,8 @@ class Pallet:
             img = imread(io.BytesIO(base64.b64decode(encode)))
             cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             #pltimg = cv2.resize(img,(416,416))
-            center = self.Kmeans(cv2_img)
+            #center = self.Kmeans(cv2_img)
+            center = []
         except ValueError:
             error.append(ValueError)
         return center, error
