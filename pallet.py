@@ -60,7 +60,7 @@ class Pallet:
         
         #center = np.uint8(centersList[newK])
         centers = []
-        for key,value in sorted(union.items(), key= lambda x : x[1]):
+        for key,value in sorted(union.items(), key= lambda x : x[1],reverse=True):
             #centers.append(centersList[newK][key].tolist())
             centers.append(center[key].tolist())
         
