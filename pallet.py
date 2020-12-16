@@ -38,29 +38,31 @@ class Pallet:
         sse = []
         labels = []
         centersList = []
-        for i in range(1,30):
-            ret,label,center = cv2.kmeans(np_image,i,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
-            sse.append(ret)
-            labels.append(label)
-            centersList.append(center)
+        # for i in range(1,30):
+        #     ret,label,center = cv2.kmeans(np_image,i,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+        #     sse.append(ret)
+        #     labels.append(label)
+        #     centersList.append(center)
 
-        kn = KneeLocator(range(1,30), sse , curve='convex', direction='decreasing')
+        # kn = KneeLocator(range(1,30), sse , curve='convex', direction='decreasing')
+    
         
-        #print(sse)
-        #print(kn.knee)
+        # newK = kn.knee - 1
+        # if self.K < kn.knee:
+        #     newK = self.K-1
+
+        ret,label,center = cv2.kmeans(np_image,self.K,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+        #colors, count = np.unique(labels[newK].flatten(),return_counts= True)
+        colors, count = np.unique(label.flatten(),return_counts= True)
         
-        newK = kn.knee - 1
-        if self.K < kn.knee:
-            newK = self.K-1
-        
-        colors, count = np.unique(labels[newK].flatten(),return_counts= True)
-        
+
         union = dict(zip(colors,count))
         
-        center = np.uint8(centersList[newK])
+        #center = np.uint8(centersList[newK])
         centers = []
         for key,value in sorted(union.items(), key= lambda x : x[1]):
-            centers.append(centersList[newK][key].tolist())
+            #centers.append(centersList[newK][key].tolist())
+            centers.append(center[key].tolist())
         
         cent = []
         for i in centers:
