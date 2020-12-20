@@ -8,7 +8,7 @@ Was develop by Fernando Noronha and Murilo Paulino.
 
 For this example, we used conda enviroment with python version 3.7.8.
 ```bash
-conda create myenv python=3.7.8
+conda create -n colorkapi python=3.7
 ```
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the requirements.
