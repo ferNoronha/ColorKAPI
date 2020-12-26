@@ -26,7 +26,7 @@ async def process(item: Item):
             file64 =  item.data.encode()
             b64_string = file64.decode()
             centers,error = colors.process(b64_string)
-            print('teste')
+            #print('teste')
         except ValueError:
             error.append(ValueError)
     else:

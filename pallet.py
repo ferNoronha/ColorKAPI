@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 class Pallet:
     def __init__(self,K:5):
-        self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+        self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 1.0)
         self.K = K
     
     def process(self,encode):
@@ -51,7 +51,8 @@ class Pallet:
         # if self.K < kn.knee:
         #     newK = self.K-1
 
-        ret,label,center = cv2.kmeans(np_image,self.K,None,self.criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+        #cv2.KMEANS_RANDOM_CENTERS
+        ret,label,center = cv2.kmeans(np_image,self.K,None,self.criteria, 10, cv2.KMEANS_PP_CENTERS)
         #colors, count = np.unique(labels[newK].flatten(),return_counts= True)
         colors, count = np.unique(label.flatten(),return_counts= True)
         
